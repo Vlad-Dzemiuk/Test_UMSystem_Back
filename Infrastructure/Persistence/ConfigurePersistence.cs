@@ -1,3 +1,6 @@
+using Application.Common.Interfaces.Queries;
+using Application.Common.Interfaces.Repositories;
+using Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
@@ -9,27 +12,27 @@ public static class ConfigurePersistence
 {
     public static void AddPersistence(this IServiceCollection services, IConfiguration configuration)
     {
-        /*var dataSourceBuild = new NpgsqlDataSourceBuilder(configuration.GetConnectionString("Default"));
-        dataSourceBuild.EnableDynamicJson();
-        var dataSource = dataSourceBuild.Build();
+        services.AddSingleton<MongoDbService>(sp =>
+        {
+            var config = sp.GetRequiredService<IConfiguration>();
+            return new MongoDbService(config);
+        });
 
-        services.AddDbContext<ApplicationDbContext>(
-            options => options
-                .UseNpgsql(
-                    dataSource,
-                    builder => builder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName))
-                .UseSnakeCaseNamingConvention()
-                .ConfigureWarnings(w => w.Ignore(CoreEventId.ManyServiceProvidersCreatedWarning)));
-                */
-
-        services.AddScoped<ApplicationDbContextInitialiser>();
         services.AddRepositories();
     }
 
     private static void AddRepositories(this IServiceCollection services)
     {
-        /*services.AddScoped<PostRepository>();
-        services.AddScoped<IPostRepository>(provider => provider.GetRequiredService<PostRepository>());
-        services.AddScoped<IPostQueries>(provider => provider.GetRequiredService<PostRepository>());*/
+        services.AddScoped<UserRepository>();
+        services.AddScoped<IUserRepository>(provider => provider.GetService<UserRepository>());
+        services.AddScoped<IUserQueries>(provider => provider.GetService<UserRepository>());
+        
+        services.AddScoped<SectionRepository>();
+        services.AddScoped<ISectionRepository>(provider => provider.GetService<SectionRepository>());
+        services.AddScoped<ISectionQueries>(provider => provider.GetService<SectionRepository>());
+        
+        services.AddScoped<SectionItemRepository>();
+        services.AddScoped<ISectionItemRepository>(provider => provider.GetService<SectionItemRepository>());
+        services.AddScoped<ISectionItemQueries>(provider => provider.GetService<SectionItemRepository>());
     }
 }

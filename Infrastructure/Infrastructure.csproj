@@ -10,7 +10,7 @@
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
       <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.1" />
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.1" />
-      <PackageReference Include="Optional" Version="5.0.0-alpha" />
+      <PackageReference Include="MongoDB.Driver" Version="3.1.0" />
     </ItemGroup>
 
     <ItemGroup>

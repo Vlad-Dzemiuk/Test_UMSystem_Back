@@ -1,52 +1,52 @@
 using Application.Common.Interfaces.Queries;
 using Application.Common.Interfaces.Repositories;
 using Domain.Sections;
-using Microsoft.EntityFrameworkCore;
-using Optional;
+using Domain.Users;
+using MongoDB.Driver;
 
 namespace Infrastructure.Persistence.Repositories;
 
-public class SectionRepository(ApplicationDbContext context) : ISectionRepository, ISectionQueries
+public class SectionRepository : ISectionRepository, ISectionQueries
 {
-    public async Task<IReadOnlyList<Section>> GetAll(CancellationToken cancellationToken)
+    private readonly IMongoCollection<Section> _section;
+
+    public SectionRepository(MongoDbService mongoDbService)
     {
-        return await context.Sections
-            .AsNoTracking()
-            .ToListAsync(cancellationToken);
+        _section = mongoDbService.Database.GetCollection<Section>("section");
     }
 
-    public async Task<Section> Create(Section section, CancellationToken cancellationToken)
+    public async Task<IEnumerable<Section>> GetAll()
     {
-        await context.Sections.AddAsync(section, cancellationToken);
-        await context.SaveChangesAsync(cancellationToken);
+        return await _section.Find(FilterDefinition<Section>.Empty).ToListAsync();
+    }
+
+    public async Task<Section> GetById(string id)
+    {
+        var filter = Builders<Section>.Filter.Eq<>(x => x.Id, id);
+        var section = await _section.Find(filter).FirstOrDefaultAsync();
+
+        if (section == null)
+        {
+            throw new KeyNotFoundException($"Section with id {id} not found.");
+        }
 
         return section;
     }
 
-    public async Task<Option<Section>> GetById(SectionId id, CancellationToken cancellationToken)
+    public async Task Create(Section section)
     {
-        var entity = await context.Sections
-            .AsNoTracking()
-            .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
-
-        return entity == null ? Option.None<Section>() : Option.Some(entity);
+        await _section.InsertOneAsync(section);
     }
 
-    public async Task<Section> Update(Section section, CancellationToken cancellationToken)
+    public async Task Update(string id, Section section)
     {
-        context.Sections.Update(section);
-
-        await context.SaveChangesAsync(cancellationToken);
-
-        return section;
+        var filter = Builders<Section>.Filter.Eq<>(x => x.Id, id);
+        await _section.ReplaceOneAsync(filter, section);
     }
 
-    public async Task<Section> Delete(Section section, CancellationToken cancellationToken)
+    public async Task Delete(string id)
     {
-        context.Sections.Remove(section);
-
-        await context.SaveChangesAsync(cancellationToken);
-
-        return section;
+        var filter = Builders<Section>.Filter.Eq<>(x => x.Id, id);
+        await _section.DeleteOneAsync(filter);
     }
 }

@@ -9,7 +9,7 @@ public class Section
     public string Name { get; private set; }
     public UserId UserId { get; }
     public User? User { get; }
-    public List<Section_Items.Section_Items> SectionItemses { get; }
+    public List<Section_Items.SectionItem> SectionItemses { get; }
     public DateTime CreatedAt { get; private set; }
     
     private Section(SectionId id, string name, UserId userId, DateTime createdAt)

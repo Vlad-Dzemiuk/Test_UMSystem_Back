@@ -1,52 +1,51 @@
 using Application.Common.Interfaces.Queries;
 using Application.Common.Interfaces.Repositories;
 using Domain.Users;
-using Microsoft.EntityFrameworkCore;
-using Optional;
+using MongoDB.Driver;
 
 namespace Infrastructure.Persistence.Repositories;
 
-public class UserRepository(ApplicationDbContext context) : IUserRepository, IUserQueries
+public class UserRepository : IUserRepository, IUserQueries
 {
-    public async Task<IReadOnlyList<User>> GetAll(CancellationToken cancellationToken)
+    private readonly IMongoCollection<User> _user;
+
+    public UserRepository(MongoDbService mongoDbService)
     {
-        return await context.Users
-            .AsNoTracking()
-            .ToListAsync(cancellationToken);
+        _user = mongoDbService.Database.GetCollection<User>("user");
     }
 
-    public async Task<User> Create(User user, CancellationToken cancellationToken)
+    public async Task<IEnumerable<User>> GetAll()
     {
-        await context.Users.AddAsync(user, cancellationToken);
-        await context.SaveChangesAsync(cancellationToken);
+        return await _user.Find(FilterDefinition<User>.Empty).ToListAsync();
+    }
+
+    public async Task<User> GetById(string id)
+    {
+        var filter = Builders<User>.Filter.Eq<>(x => x.Id, id);
+        var user = await _user.Find(filter).FirstOrDefaultAsync();
+
+        if (user == null)
+        {
+            throw new KeyNotFoundException($"User with id {id} not found.");
+        }
 
         return user;
     }
 
-    public async Task<Option<User>> GetById(UserId id, CancellationToken cancellationToken)
+    public async Task Create(User user)
     {
-        var entity = await context.Users
-            .AsNoTracking()
-            .FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
-
-        return entity == null ? Option.None<User>() : Option.Some(entity);
+        await _user.InsertOneAsync(user);
     }
 
-    public async Task<User> Update(User user, CancellationToken cancellationToken)
+    public async Task Update(string id, User user)
     {
-        context.Users.Update(user);
-
-        await context.SaveChangesAsync(cancellationToken);
-
-        return user;
+        var filter = Builders<User>.Filter.Eq<>(x => x.Id, id);
+        await _user.ReplaceOneAsync(filter, user);
     }
 
-    public async Task<User> Delete(User user, CancellationToken cancellationToken)
+    public async Task Delete(string id)
     {
-        context.Users.Remove(user);
-
-        await context.SaveChangesAsync(cancellationToken);
-
-        return user;
+        var filter = Builders<User>.Filter.Eq<>(x => x.Id, id);
+        await _user.DeleteOneAsync(filter);
     }
 }

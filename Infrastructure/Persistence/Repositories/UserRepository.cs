@@ -21,7 +21,7 @@ public class UserRepository : IUserRepository, IUserQueries
 
     public async Task<User> GetById(string id)
     {
-        var filter = Builders<User>.Filter.Eq<>(x => x.Id, id);
+        var filter = Builders<User>.Filter.Eq(x => x.Id.Value, Guid.Parse(id));
         var user = await _user.Find(filter).FirstOrDefaultAsync();
 
         if (user == null)
@@ -39,13 +39,13 @@ public class UserRepository : IUserRepository, IUserQueries
 
     public async Task Update(string id, User user)
     {
-        var filter = Builders<User>.Filter.Eq<>(x => x.Id, id);
+        var filter = Builders<User>.Filter.Eq(x => x.Id.Value, Guid.Parse(id));
         await _user.ReplaceOneAsync(filter, user);
     }
 
     public async Task Delete(string id)
     {
-        var filter = Builders<User>.Filter.Eq<>(x => x.Id, id);
+        var filter = Builders<User>.Filter.Eq(x => x.Id.Value, Guid.Parse(id));
         await _user.DeleteOneAsync(filter);
     }
 }

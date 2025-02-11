@@ -10,7 +10,7 @@ public class User
     public string LastName { get; private set; }
     public string Email { get; private set; }
     public string ProfilePicture { get; private set; }
-    public List<Section> Sections { get; }
+    public List<Section> Sections { get; private set; } = new();
 
     public DateTime UpdatedAt { get; private set; }
     public DateTime CreatedAt { get; private set; }

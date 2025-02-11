@@ -9,7 +9,7 @@ public class Section
     public string Name { get; private set; }
     public UserId UserId { get; }
     public User? User { get; }
-    public List<Section_Items.SectionItem> SectionItemses { get; }
+    public List<Section_Items.SectionItem> SectionItemses { get; private set; } = new();
     public DateTime CreatedAt { get; private set; }
     
     private Section(SectionId id, string name, UserId userId, DateTime createdAt)
@@ -22,4 +22,9 @@ public class Section
     
     public static Section New(SectionId id, UserId userId, string name)
         => new(id, name, userId, DateTime.UtcNow);
+    
+    public void UpdateName(string name)
+    {
+        Name = name;
+    }
 }

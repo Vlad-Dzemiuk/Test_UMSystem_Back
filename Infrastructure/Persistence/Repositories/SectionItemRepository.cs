@@ -21,7 +21,7 @@ public class SectionItemRepository : ISectionItemRepository, ISectionItemQueries
 
     public async Task<SectionItem> GetById(string id)
     {
-        var filter = Builders<SectionItem>.Filter.Eq<>(x => x.Id, id);
+        var filter = Builders<SectionItem>.Filter.Eq(x => x.Id.Value, Guid.Parse(id));
         var sectionItem = await _sectionItem.Find(filter).FirstOrDefaultAsync();
 
         if (sectionItem == null)
@@ -39,13 +39,13 @@ public class SectionItemRepository : ISectionItemRepository, ISectionItemQueries
 
     public async Task Update(string id, SectionItem sectionItem)
     {
-        var filter = Builders<SectionItem>.Filter.Eq<>(x => x.Id, id);
+        var filter = Builders<SectionItem>.Filter.Eq(x => x.Id.Value, Guid.Parse(id));
         await _sectionItem.ReplaceOneAsync(filter, sectionItem);
     }
 
     public async Task Delete(string id)
-    {
-        var filter = Builders<SectionItem>.Filter.Eq<>(x => x.Id, id);
+    {        
+        var filter = Builders<SectionItem>.Filter.Eq(x => x.Id.Value, Guid.Parse(id));
         await _sectionItem.DeleteOneAsync(filter);
     }
 }

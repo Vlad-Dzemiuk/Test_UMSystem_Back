@@ -1,25 +1,50 @@
-using Domain.Users;
+using System.ComponentModel.DataAnnotations;
+using Domain;
 
 namespace API.Dtos;
 
-public record UserDto(
-    Guid? Id,
-    string? FirstName,
-    string? MiddleName,
-    string? LastName,
-    string? Email,
-    string? ProfilePicture,
-    DateTime? CreatedAt,
-    DateTime? UpdatedAt)
+public record UserDto()
 {
-    public static UserDto FromDomainModel(User user)
-        => new UserDto(
-            Id: user.Id.Value,
-            FirstName: user.FirstName,
-            MiddleName: user.MiddleName,
-            LastName: user.LastName,
-            Email: user.Email,
-            ProfilePicture: user.ProfilePicture,
-            CreatedAt: user.CreatedAt,
-            UpdatedAt: user.UpdatedAt);
+    public string UserId { get; set; }
+    public string FirstName { get; set; }
+    public string MiddleName { get; set; }
+    public string LastName { get; set; }
+    public string Email { get; set; }
+    public string? ProfilePicture { get; set; }
+    public List<Section> Sections { get; set; } = new();    
 }
+
+public class CreateUserDto
+{
+    [Required]
+    public string FirstName { get; set; }
+
+    [Required]
+    public string MiddleName { get; set; }
+
+    [Required]
+    public string LastName { get; set; }
+
+    [Required, EmailAddress]
+    public string Email { get; set; }
+
+    public string? ProfilePicture { get; set; }
+}
+
+public class UpdateUserDto
+{
+    [Required]
+    public string FirstName { get; set; }
+
+    [Required]
+    public string MiddleName { get; set; }
+
+    [Required]
+    public string LastName { get; set; }
+
+    [Required, EmailAddress]
+    public string Email { get; set; }
+
+    public string? ProfilePicture { get; set; }
+}
+

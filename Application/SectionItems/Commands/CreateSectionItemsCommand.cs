@@ -1,8 +1,7 @@
 using Application.Common;
 using Application.Common.Interfaces.Repositories;
 using Application.SectionItems.Exceptions;
-using Domain.Section_Items;
-using Domain.Sections;
+using Domain;
 using MediatR;
 
 namespace Application.SectionItems.Commands;
@@ -14,7 +13,7 @@ public class CreateSectionItemsCommand : IRequest<Result<SectionItem, SectionIte
     public required string Content { get; init; }
 }
 
-public class CreateSectionItemsCommandHandler(
+/*public class CreateSectionItemsCommandHandler(
     ISectionItemRepository sectionItemRepository,
     ISectionRepository sectionRepository)
     : IRequestHandler<CreateSectionItemsCommand, Result<SectionItem, SectionItemException>>
@@ -51,4 +50,4 @@ public class CreateSectionItemsCommandHandler(
             return new SectionItemUnknownException(SectionItemId.Empty(), exception);
         }
     }
-}
+}*/

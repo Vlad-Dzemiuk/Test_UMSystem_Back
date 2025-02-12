@@ -1,4 +1,4 @@
-using Domain.Section_Items;
+using Domain;
 
 namespace Application.Common.Interfaces.Queries;
 

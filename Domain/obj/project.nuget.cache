@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "s1XoF7NjQLmdEbHJkBZFSF01A7oBPadR7yEJSXdNgcdKOPw45SiQi1rXsFHF1isZXgqT3cWmS9b8TD71ChJEEA==",
+  "dgSpecHash": "AGAaKsSyWm3tOZtPO6vrI8QZ8ZByB7KJ4r49G4eaV1vElEIeG/h2UAjrpHXg6TGGWsAE6a4jQ2hrJpeA5VC+gw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\Domain\\Domain.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Admin\\.nuget\\packages\\mongodb.bson\\3.1.0\\mongodb.bson.3.1.0.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\5.0.0\\system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

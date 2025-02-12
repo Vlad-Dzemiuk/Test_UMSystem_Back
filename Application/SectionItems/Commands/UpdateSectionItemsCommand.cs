@@ -1,9 +1,7 @@
 using Application.Common;
 using Application.Common.Interfaces.Repositories;
 using Application.SectionItems.Exceptions;
-using Domain.Section_Items;
-using Domain.Sections;
-using Domain.Users;
+using Domain;
 using MediatR;
 
 namespace Application.SectionItems.Commands;

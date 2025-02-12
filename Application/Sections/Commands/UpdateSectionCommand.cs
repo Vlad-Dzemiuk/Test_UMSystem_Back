@@ -1,8 +1,7 @@
 using Application.Common;
 using Application.Common.Interfaces.Repositories;
 using Application.Sections.Exceptions;
-using Domain.Sections;
-using Domain.Users;
+using Domain;
 using MediatR;
 
 namespace Application.Sections.Commands;
@@ -14,7 +13,7 @@ public class UpdateSectionCommand : IRequest<Result<Section, SectionException>>
     public required string Name { get; init; }
 }
 
-public class UpdateSectionCommandHandler(
+/*public class UpdateSectionCommandHandler(
     ISectionRepository sectionRepository,
     IUserRepository userRepository)
     : IRequestHandler<UpdateSectionCommand, Result<Section, SectionException>>
@@ -42,4 +41,4 @@ public class UpdateSectionCommandHandler(
         
         return section;
     }
-}
+}*/

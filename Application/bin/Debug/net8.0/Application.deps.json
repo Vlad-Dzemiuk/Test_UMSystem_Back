@@ -90,6 +90,18 @@
           }
         }
       },
+      "MongoDB.Bson/3.1.0": {
+        "dependencies": {
+          "System.Memory": "4.5.5",
+          "System.Runtime.CompilerServices.Unsafe": "6.0.0-preview.4.21253.7"
+        },
+        "runtime": {
+          "lib/net6.0/MongoDB.Bson.dll": {
+            "assemblyVersion": "3.1.0.0",
+            "fileVersion": "3.1.0.0"
+          }
+        }
+      },
       "Optional/5.0.0-alpha": {
         "runtime": {
           "lib/netstandard2.0/Optional.dll": {
@@ -106,8 +118,12 @@
           }
         }
       },
+      "System.Memory/4.5.5": {},
       "System.Runtime.CompilerServices.Unsafe/6.0.0-preview.4.21253.7": {},
       "Domain/1.0.0": {
+        "dependencies": {
+          "MongoDB.Bson": "3.1.0"
+        },
         "runtime": {
           "Domain.dll": {
             "assemblyVersion": "1.0.0",
@@ -172,6 +188,13 @@
       "path": "microsoft.extensions.primitives/6.0.0-preview.4.21253.7",
       "hashPath": "microsoft.extensions.primitives.6.0.0-preview.4.21253.7.nupkg.sha512"
     },
+    "MongoDB.Bson/3.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3dhaZhz18B5vUoEP13o2j8A6zQfkHdZhwBvLZEjDJum4BTLLv1/Z8bt25UQEtpqvYwLgde4R6ekWZ7XAYUMxuw==",
+      "path": "mongodb.bson/3.1.0",
+      "hashPath": "mongodb.bson.3.1.0.nupkg.sha512"
+    },
     "Optional/5.0.0-alpha": {
       "type": "package",
       "serviceable": true,
@@ -185,6 +208,13 @@
       "sha512": "sha512-vFgm2rr53rp46mFmO+ihwVf9zOZu4sA11ULmCbmvrYEG3XR45ql1CYBSEEsntMQeZG0B/qiOOifnLTxB5G1C0A==",
       "path": "system.io.pipelines/6.0.0-preview.4.21253.7",
       "hashPath": "system.io.pipelines.6.0.0-preview.4.21253.7.nupkg.sha512"
+    },
+    "System.Memory/4.5.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-XIWiDvKPXaTveaB7HVganDlOCRoj03l+jrwNvcge/t8vhGYKvqV+dMv6G4SAX2NoNmN0wZfVPTAlFwZcZvVOUw==",
+      "path": "system.memory/4.5.5",
+      "hashPath": "system.memory.4.5.5.nupkg.sha512"
     },
     "System.Runtime.CompilerServices.Unsafe/6.0.0-preview.4.21253.7": {
       "type": "package",

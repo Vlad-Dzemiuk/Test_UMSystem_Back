@@ -1,7 +1,6 @@
 using Application.Common.Interfaces.Queries;
 using Application.Common.Interfaces.Repositories;
-using Domain.Sections;
-using Domain.Users;
+using Domain;
 using MongoDB.Driver;
 
 namespace Infrastructure.Persistence.Repositories;
@@ -22,7 +21,7 @@ public class SectionRepository : ISectionRepository, ISectionQueries
 
     public async Task<Section> GetById(string id)
     {
-        var filter = Builders<Section>.Filter.Eq(x => x.Id.Value, Guid.Parse(id));
+        var filter = Builders<Section>.Filter.Eq(x => x.SectionId, id);
         var section = await _section.Find(filter).FirstOrDefaultAsync();
 
         if (section == null)
@@ -40,13 +39,13 @@ public class SectionRepository : ISectionRepository, ISectionQueries
 
     public async Task Update(string id, Section section)
     {
-        var filter = Builders<Section>.Filter.Eq(x => x.Id.Value, Guid.Parse(id));
+        var filter = Builders<Section>.Filter.Eq(x => x.SectionId, id);
         await _section.ReplaceOneAsync(filter, section);
     }
 
     public async Task Delete(string id)
     {
-        var filter = Builders<Section>.Filter.Eq(x => x.Id.Value, Guid.Parse(id));
+        var filter = Builders<Section>.Filter.Eq(x => x.SectionId, id);
         await _section.DeleteOneAsync(filter);
     }
 }

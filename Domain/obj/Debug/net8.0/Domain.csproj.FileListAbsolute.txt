@@ -10,3 +10,4 @@ C:\Users\Admin\3 курс\Виробнича практика\C#\Test_UMSystem\D
 C:\Users\Admin\3 курс\Виробнича практика\C#\Test_UMSystem\Domain\obj\Debug\net8.0\refint\Domain.dll
 C:\Users\Admin\3 курс\Виробнича практика\C#\Test_UMSystem\Domain\obj\Debug\net8.0\Domain.pdb
 C:\Users\Admin\3 курс\Виробнича практика\C#\Test_UMSystem\Domain\obj\Debug\net8.0\ref\Domain.dll
+C:\Users\Admin\3 курс\Виробнича практика\C#\Test_UMSystem\Domain\obj\Debug\net8.0\Domain.csproj.AssemblyReference.cache

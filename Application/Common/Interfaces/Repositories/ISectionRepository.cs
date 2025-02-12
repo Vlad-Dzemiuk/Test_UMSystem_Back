@@ -1,4 +1,4 @@
-using Domain.Sections;
+using Domain;
 
 namespace Application.Common.Interfaces.Repositories;
 

@@ -47,4 +47,3 @@ public class UpdateUserDto
 
     public string? ProfilePicture { get; set; }
 }
-

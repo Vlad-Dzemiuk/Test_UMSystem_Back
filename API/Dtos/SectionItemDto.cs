@@ -1,21 +1,35 @@
-using Domain;
+using System.ComponentModel.DataAnnotations;
 
 namespace API.Dtos;
 
-public record SectionItemDto(
-    Guid? Id,
-    string? Title,
-    string? Content,
-    Guid? SectionId,
-    SectionDto? Section,
-    DateTime? CreatedAt)
+public record SectionItemDto()
 {
-    /*public static SectionItemDto FromDomainModel(SectionItem sectionItem)
-        => new(
-            Id: sectionItem.Id.Value,
-            Title: sectionItem.Title,
-            Content: sectionItem.Content,
-            SectionId: sectionItem.SectionId.Value,
-            Section: sectionItem.Section is null ? null : SectionDto.FromDomainModel(sectionItem.Section),
-            CreatedAt: sectionItem.CreatedAt);*/
+    public string SectionItemId { get; set; }
+    public string Title { get; set; }
+    public string Content { get; set; }
+    public string? SectionId { get; set; }    
+}
+
+public class CreateSectionItemDto
+{
+    [Required]
+    public string Title { get; set; }
+
+    [Required]
+    public string Content { get; set; }
+    
+    [Required]
+    public string? SectionId { get; set; }
+}
+
+public class UpdateSectionItemDto
+{
+    [Required]
+    public string Title { get; set; }
+
+    [Required]
+    public string Content { get; set; }
+    
+    [Required]
+    public string? SectionId { get; set; }
 }

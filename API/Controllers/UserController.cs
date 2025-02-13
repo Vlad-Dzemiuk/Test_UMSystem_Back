@@ -46,86 +46,27 @@ namespace API.Controllers
         }
         
         [HttpPost]
-        public async Task<ActionResult<UserDto>> Post([FromBody] CreateUserDto createUserDto)
+        public async Task<ActionResult<UserDto>> Post([FromBody] CreateUserDto dto)
         {
-            var user = new User
-            {
-                FirstName = createUserDto.FirstName,
-                MiddleName = createUserDto.MiddleName,
-                LastName = createUserDto.LastName,
-                Email = createUserDto.Email,
-                ProfilePicture = createUserDto.ProfilePicture,
-                Sections = new List<Section>(), // Порожній список секцій
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow
-            };
-
-            await _userRepository.Create(user);
-
-            var userDto = new UserDto
-            {
-                UserId = user.UserId,
-                FirstName = user.FirstName,
-                MiddleName = user.MiddleName,
-                LastName = user.LastName,
-                Email = user.Email,
-                ProfilePicture = user.ProfilePicture,
-                Sections = user.Sections
-            };
-
-            return CreatedAtAction(nameof(GetById), new { id = user.UserId }, userDto);
+            var command = new CreateUserCommand(dto);
+            var result = await _mediator.Send(command);
+            return CreatedAtAction(nameof(GetById), new { id = result.UserId }, result);
         }
-
         
         [HttpPut("{id}")]
-        public async Task<ActionResult> Put(string id, [FromBody] UpdateUserDto updateUserDto)
+        public async Task<ActionResult<UserDto>> Put(string id, [FromBody] UpdateUserDto dto)
         {
-            try
-            {
-                var existingUser = await _userQueries.GetById(id);
-                if (existingUser == null)
-                    return NotFound($"User with id {id} not found.");
-
-                // Оновлюємо дані користувача
-                existingUser = new User
-                {
-                    UserId = id,
-                    FirstName = updateUserDto.FirstName,
-                    MiddleName = updateUserDto.MiddleName,
-                    LastName = updateUserDto.LastName,
-                    Email = updateUserDto.Email,
-                    ProfilePicture = updateUserDto.ProfilePicture,
-                    Sections = existingUser.Sections, // Не змінюємо секції
-                    CreatedAt = existingUser.CreatedAt, // Не змінюємо дату створення
-                    UpdatedAt = DateTime.UtcNow // Оновлюємо дату редагування
-                };
-
-                await _userRepository.Update(id, existingUser);
-                return Ok();
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            var command = new UpdateUserCommand(id, dto);
+            var result = await _mediator.Send(command);
+            return Ok(result);
         }
         
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(string id)
         {
-            try
-            {
-                var existingUser = await _userQueries.GetById(id);
-                if (existingUser == null)
-                    return NotFound($"User with id {id} not found.");
-
-                await _userRepository.Delete(id);
-                return Ok();
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
+            var command = new DeleteUserCommand(id);
+            await _mediator.Send(command);
+            return Ok();
         }
-
     }
 }

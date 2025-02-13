@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using Domain;
 
 namespace API.Dtos;
@@ -16,34 +15,18 @@ public record UserDto()
 
 public class CreateUserDto
 {
-    [Required]
     public string FirstName { get; set; }
-
-    [Required]
     public string MiddleName { get; set; }
-
-    [Required]
     public string LastName { get; set; }
-
-    [Required, EmailAddress]
     public string Email { get; set; }
-
     public string? ProfilePicture { get; set; }
 }
 
 public class UpdateUserDto
 {
-    [Required]
     public string FirstName { get; set; }
-
-    [Required]
     public string MiddleName { get; set; }
-
-    [Required]
     public string LastName { get; set; }
-
-    [Required, EmailAddress]
     public string Email { get; set; }
-
     public string? ProfilePicture { get; set; }
 }

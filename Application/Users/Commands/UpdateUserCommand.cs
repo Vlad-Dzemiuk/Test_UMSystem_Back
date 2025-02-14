@@ -39,11 +39,9 @@ public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, UserD
 
     public async Task<UserDto> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
     {
-        // Отримуємо користувача
         var existingUser = await _userQueries.GetById(request.UserId) 
                            ?? throw new UserNotFoundException(request.UserId);
 
-        // Оновлюємо дані
         existingUser.FirstName = request.FirstName;
         existingUser.MiddleName = request.MiddleName;
         existingUser.LastName = request.LastName;

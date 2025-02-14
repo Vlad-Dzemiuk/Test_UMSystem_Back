@@ -14,8 +14,8 @@ public class Section
     public string Name { get; set; }
 
     [BsonElement("user_id"), BsonRepresentation(BsonType.ObjectId)]
-    public string? UserId { get; set; }
-
+    public string UserId { get; set; }
+    
     [BsonElement("created_at"), BsonRepresentation(BsonType.DateTime)]
     public DateTime CreatedAt { get; set; }
     

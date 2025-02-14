@@ -1,4 +1,5 @@
-using Application.Common;
+using API.Dtos;
+using Application.Common.Interfaces.Queries;
 using Application.Common.Interfaces.Repositories;
 using Application.Sections.Exceptions;
 using Domain;
@@ -6,30 +7,65 @@ using MediatR;
 
 namespace Application.Sections.Commands;
 
-public class CreateSectionCommand : IRequest<Result<Section, SectionException>>
+public class CreateSectionCommand : IRequest<SectionDto>
 {
-    public required Guid UserId { get; init; }
-    public required string Name { get; init; }
+    public string UserId { get; set; }
+    public string Name { get; set; }
+    
+    public CreateSectionCommand(CreateSectionDto dto)
+    {
+        Name = dto.Name;
+        UserId = dto.UserId;
+    }
 }
 
-/*public class CreateSectionCommandHandler(ISectionRepository sectionRepository) 
-    : IRequestHandler<CreateSectionCommand, Result<Section, SectionException>>
+public class CreateSectionCommandHandler : IRequestHandler<CreateSectionCommand, SectionDto>
 {
-    public async Task<Result<Section, SectionException>> Handle(CreateSectionCommand request, CancellationToken cancellationToken)
+    private readonly ISectionRepository _sectionRepository;
+    private readonly ISectionQueries _sectionQueries;
+    private readonly IUserRepository _userRepository;
+    private readonly IUserQueries _userQueries;
+
+    public CreateSectionCommandHandler(ISectionRepository sectionRepository, ISectionQueries sectionQueries, IUserQueries userQueries, IUserRepository userRepository)
     {
-        var userId = new UserId(request.UserId);
-        var sectionId = SectionId.New();
-
-        var section = Section.New(sectionId, userId, request.Name);
-
-        try
-        {
-            await sectionRepository.Create(section);
-            return section;
-        }
-        catch (Exception ex)
-        {
-            return new SectionUnknownException(sectionId, ex);
-        }
+        _sectionRepository = sectionRepository;
+        _sectionQueries = sectionQueries;
+        _userQueries = userQueries;
+        _userRepository = userRepository;
     }
-}*/
+
+    public async Task<SectionDto> Handle(CreateSectionCommand request, CancellationToken cancellationToken)
+    {
+        var existingSections = await _sectionQueries.GetAll();
+        if (existingSections.Any(u => u.Name == request.Name))
+        {
+            throw new SectionAlreadyExistsException(request.Name);
+        }
+
+        var section = new Section
+        {
+            Name = request.Name,
+            UserId = request.UserId,
+            SectionItems = new List<SectionItem>(),
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow
+        };
+
+        await _sectionRepository.Create(section);
+
+        var user = await _userQueries.GetById(request.UserId);
+        if (user != null)
+        {
+            user.Sections.Add(section);
+            await _userRepository.Update(user.UserId, user);
+        }
+        
+        return new SectionDto
+        {
+            SectionId = section.SectionId,
+            Name = section.Name,
+            UserId = section.UserId,
+            SectionItems = section.SectionItems
+        };
+    }
+}

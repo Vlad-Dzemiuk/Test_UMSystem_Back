@@ -6,6 +6,7 @@ public class DeleteSectionItemsCommandValidator: AbstractValidator<DeleteSection
 {
     public DeleteSectionItemsCommandValidator()
     {
-        RuleFor(x => x.SectionItemId).NotEmpty();
+        RuleFor(x => x.SectionItemId)
+            .NotEmpty().WithMessage("Section item ID is required.");
     }
 }

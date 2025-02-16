@@ -6,6 +6,14 @@ public class CreateSectionItemCommandValidator : AbstractValidator<CreateSection
 {
     public CreateSectionItemCommandValidator()
     {
+        RuleFor(x => x.Title).NotEmpty()
+            .MaximumLength(255)
+            .MinimumLength(3);
+        
+        RuleFor(x => x.Content).NotEmpty()
+            .MaximumLength(255)
+            .MinimumLength(3);
+        
         RuleFor(x => x.SectionId).NotEmpty();
     }
 }

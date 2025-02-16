@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Application.Common.Interfaces.Queries;
 using Application.Common.Interfaces.Repositories;
 using Application.Sections.Commands;
-using Application.Users.Commands;
 using Domain;
 using MediatR;
 

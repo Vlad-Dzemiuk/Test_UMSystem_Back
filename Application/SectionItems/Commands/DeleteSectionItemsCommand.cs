@@ -1,44 +1,49 @@
-using Application.Common;
+using Application.Common.Interfaces.Queries;
 using Application.Common.Interfaces.Repositories;
 using Application.SectionItems.Exceptions;
-using Domain;
 using MediatR;
 
 namespace Application.SectionItems.Commands;
 
-public class DeleteSectionItemsCommand : IRequest<Result<SectionItem, SectionItemException>>
+public class DeleteSectionItemsCommand : IRequest<Unit>
 {
-    public required Guid SectionItemId { get; set; }
+    public string SectionItemId { get; }
+
+    public DeleteSectionItemsCommand(string sectionItemId)
+    {
+        SectionItemId = sectionItemId;
+    }
 }
 
-public class DeleteSectionItemsCommandHandler(
-    ISectionItemRepository sectionItemRepository) : IRequestHandler<DeleteSectionItemsCommand, Result<SectionItem, SectionItemException>>
+public class DeleteSectionItemsCommandHandler : IRequestHandler<DeleteSectionItemsCommand, Unit>
 {
-    /*public async Task<Result<SectionItem, SectionItemException>> Handle(
-        DeleteSectionItemsCommand request)
-    {
-        var sectionItem = await sectionItemRepository.GetById(new SectionItemId(request.SectionItemId));
-        return await sectionItem.Match(
-            s => DeleteEntity(s),
-            () => Task.FromResult<Result<SectionItem, SectionItemException>>(
-                new SectionItemNotFoundException(new SectionItemId(request.SectionItemId))));
-    }*/
+    private readonly ISectionItemRepository _sectionItemRepository;
+    private readonly ISectionRepository _sectionRepository;
+    private readonly ISectionQueries _sectionQueries;
 
-    /*private async Task<Result<SectionItem, SectionItemException>> DeleteEntity(
-        SectionItem sectionItem)
+    public DeleteSectionItemsCommandHandler(ISectionItemRepository sectionItemRepository, ISectionRepository sectionRepository, ISectionQueries sectionQueries)
     {
-        try
-        {
-            return await sectionItemRepository.Delete(sectionItem);
-        }
-        catch (Exception exception)
-        {
-            return new SectionItemUnknownException(sectionItem.Id, exception);
-        }
-    }*/
+        _sectionQueries = sectionQueries;
+        _sectionItemRepository = sectionItemRepository;
+        _sectionRepository = sectionRepository;
+    }
 
-    public Task<Result<SectionItem, SectionItemException>> Handle(DeleteSectionItemsCommand request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(DeleteSectionItemsCommand request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var existingSectionItem = await _sectionItemRepository.GetById(request.SectionItemId);
+        if (existingSectionItem == null)
+        {
+            throw new SectionItemNotFoundException(request.SectionItemId);
+        }
+
+        var section = await _sectionQueries.GetById(existingSectionItem.SectionId);
+        if (section != null)
+        {
+            section.SectionItems.RemoveAll(s => s.SectionItemId == existingSectionItem.SectionItemId);
+            await _sectionRepository.Update(section.SectionId, section);
+        }
+        
+        await _sectionItemRepository.Delete(request.SectionItemId);
+        return Unit.Value;
     }
 }

@@ -1,53 +1,76 @@
+using API.Dtos;
 using Application.Common;
+using Application.Common.Interfaces.Queries;
 using Application.Common.Interfaces.Repositories;
 using Application.SectionItems.Exceptions;
+using Application.Sections.Commands;
+using Application.Sections.Exceptions;
 using Domain;
 using MediatR;
 
 namespace Application.SectionItems.Commands;
 
-public class CreateSectionItemsCommand : IRequest<Result<SectionItem, SectionItemException>>
+public class CreateSectionItemsCommand : IRequest<SectionItemDto>
 {
-    public required Guid SectionId { get; init; }
-    public required string Title { get; init; }
-    public required string Content { get; init; }
+    public string SectionId { get; set; }
+    public string Title { get; set; }
+    public string Content { get; set; }
+
+    public CreateSectionItemsCommand(CreateSectionItemDto dto)
+    {
+        SectionId = dto.SectionId;
+        Title = dto.Title;
+        Content = dto.Content;
+    }
 }
 
-/*public class CreateSectionItemsCommandHandler(
-    ISectionItemRepository sectionItemRepository,
-    ISectionRepository sectionRepository)
-    : IRequestHandler<CreateSectionItemsCommand, Result<SectionItem, SectionItemException>>
+public class CreateSectionCommandHandler : IRequestHandler<CreateSectionItemsCommand, SectionItemDto>
 {
-    public async Task<Result<SectionItem, SectionItemException>> Handle(
-        CreateSectionItemsCommand request,
-        CancellationToken cancellationToken)
+    private readonly ISectionItemRepository _sectionItemRepository;
+    private readonly ISectionItemQueries _sectionItemQueries;
+    private readonly ISectionRepository _sectionRepository;
+    private readonly ISectionQueries _sectionQueries;
+
+    public CreateSectionCommandHandler(ISectionItemRepository sectionItemRepository, ISectionItemQueries sectionItemQueries, ISectionQueries sectionQueries, ISectionRepository sectionRepository)
     {
-        var sectionId = new SectionId(request.SectionId);
+        _sectionItemRepository = sectionItemRepository;
+        _sectionItemQueries = sectionItemQueries;
+        _sectionQueries = sectionQueries;
+        _sectionRepository = sectionRepository;
+    }
+
+    public async Task<SectionItemDto> Handle(CreateSectionItemsCommand request, CancellationToken cancellationToken)
+    {
+        var existingSectionItems = await _sectionItemQueries.GetAll();
+        if (existingSectionItems.Any(u => u.Title == request.Title))
+        {
+            throw new SectionItemAlreadyExistsException(request.Title);
+        }
+
+        var sectionItem = new SectionItem
+        {
+            Title = request.Title,
+            Content = request.Content,
+            SectionId = request.SectionId,
+            CreatedAt = DateTime.UtcNow,
+            UpdatedAt = DateTime.UtcNow
+        };
+
+        await _sectionItemRepository.Create(sectionItem);
+
+        var section = await _sectionQueries.GetById(request.SectionId);
+        if (section != null)
+        {
+            section.SectionItems.Add(sectionItem);
+            await _sectionRepository.Update(section.SectionId, section);
+        }
         
-        var existingSectionItem = await sectionItemRepository.GetById(request.SectionId.ToString());
-
-        if (existingSectionItem != null)
+        return new SectionItemDto
         {
-            return new SectionItemAlreadyExistsException(existingSectionItem.Id);
-        }
-
-        return await CreateEntity(sectionId, request, cancellationToken);
+            SectionItemId = sectionItem.SectionItemId,
+            Title = sectionItem.Title,
+            Content = sectionItem.Content,
+            SectionId = sectionItem.SectionId
+        };
     }
-
-    private async Task<Result<SectionItem, SectionItemException>> CreateEntity(
-        SectionId sectionId,
-        CreateSectionItemsCommand request,
-        CancellationToken cancellationToken)
-    {
-        try
-        {
-            var entity = SectionItem.New(SectionItemId.New(), sectionId, request.Title, request.Content);
-            await sectionItemRepository.Create(entity);
-            return entity;
-        }
-        catch (Exception exception)
-        {
-            return new SectionItemUnknownException(SectionItemId.Empty(), exception);
-        }
-    }
-}*/
+}

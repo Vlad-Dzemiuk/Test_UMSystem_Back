@@ -1,54 +1,75 @@
-using Application.Common;
+using API.Dtos;
+using Application.Common.Interfaces.Queries;
 using Application.Common.Interfaces.Repositories;
 using Application.SectionItems.Exceptions;
-using Domain;
 using MediatR;
 
 namespace Application.SectionItems.Commands;
 
-public class UpdateSectionItemsCommand: IRequest<Result<SectionItem, SectionItemException>>
+public class UpdateSectionItemsCommand: IRequest<SectionItemDto>
 {
-    public required Guid SectionItemId { get; init; }
-    public required string Title { get; init; }
-    public required string Content { get; init; }
-    public required Guid SectionId { get; init; }
+    public string SectionItemId { get; }
+    public string Title { get; }
+    public string Content { get; }
+    public string SectionId { get; }
+
+    public UpdateSectionItemsCommand(string sectionItemId, UpdateSectionItemDto dto)
+    {
+        SectionItemId = sectionItemId;
+        Title = dto.Title;
+        Content = dto.Content;
+        SectionId = dto.SectionId;
+    }
 }
 
-/*public class UpdateSectionItemsCommandHandler(
-    ISectionItemRepository sectionItemRepository,
-    ISectionRepository sectionRepository)
-    : IRequestHandler<UpdateSectionItemsCommand, Result<SectionItem, SectionItemException>>
+public class UpdateSectionItemsCommandHandler : IRequestHandler<UpdateSectionItemsCommand, SectionItemDto>
 {
-    public async Task<Result<SectionItem, SectionItemException>> Handle(
-        UpdateSectionItemsCommand request,
-        CancellationToken cancellationToken)
-    {
-        var section = await sectionRepository.GetById(new SectionId(request.SectionId));
+    private readonly ISectionItemRepository _sectionItemRepository;
+    private readonly ISectionItemQueries _sectionItemQueries;
+    private readonly ISectionRepository _sectionRepository;
+    private readonly ISectionQueries _sectionQueries;
 
-        return await section.Match(
-            async s =>
-            {
-                var sectionItem = await sectionItemRepository.GetById(new SectionItemId(request.SectionItemId));
-                return await sectionItem.Match(
-                    i => UpdateEntity(i, request.Title, request.Content, s),
-                    () => Task.FromResult<Result<SectionItem, SectionItemException>>(
-                        new SectionItemNotFoundException(new SectionItemId(request.SectionItemId())))
-            },
-            () => Task.FromResult<Result<SectionItem, SectionItemException>>(
-                new GenderNotFoundException(new SectionId(request.SectionId))));
+    public UpdateSectionItemsCommandHandler(ISectionItemRepository sectionItemRepository, ISectionItemQueries sectionItemQueries, ISectionRepository sectionRepository, ISectionQueries sectionQueries)
+    {
+        _sectionItemRepository = sectionItemRepository;
+        _sectionItemQueries = sectionItemQueries;
+        _sectionRepository = sectionRepository;
+        _sectionQueries = sectionQueries;
     }
 
-    private async Task<Result<SectionItem, SectionItemException>> UpdateEntity(SectionItem sectionItem, string title, string content, Section section)
+    public async Task<SectionItemDto> Handle(UpdateSectionItemsCommand request, CancellationToken cancellationToken)
     {
-        try
-        {
-            sectionItem.UpdateDetails(title, content, section.Id);
+        var existingSectionItem = await _sectionItemQueries.GetById(request.SectionItemId) 
+                              ?? throw new SectionItemNotFoundException(request.SectionItemId);
 
-            return await sectionItemRepository.Update(sectionItem);
-        }
-        catch (Exception exception)
+        var oldSection = await _sectionQueries.GetById(existingSectionItem.SectionId);
+        var newSection = await _sectionQueries.GetById(request.SectionId);
+
+        existingSectionItem.Title = request.Title;
+        existingSectionItem.Content = request.Content;
+        existingSectionItem.SectionId = request.SectionId;
+        existingSectionItem.UpdatedAt = DateTime.UtcNow;
+
+        await _sectionItemRepository.Update(request.SectionItemId, existingSectionItem);
+
+        if (oldSection != null)
         {
-            return new SectionItemUnknownException(sectionItem.Id, exception);
+            oldSection.SectionItems.RemoveAll(s => s.SectionItemId == existingSectionItem.SectionItemId);
+            await _sectionRepository.Update(oldSection.SectionId, oldSection);
         }
+
+        if (newSection != null)
+        {
+            newSection.SectionItems.Add(existingSectionItem);
+            await _sectionRepository.Update(newSection.SectionId, newSection);
+        }
+
+        return new SectionItemDto
+        {
+            SectionItemId = existingSectionItem.SectionItemId,
+            Title = existingSectionItem.Title,
+            Content = existingSectionItem.Content,
+            SectionId = existingSectionItem.SectionId
+        };
     }
-}*/
+}

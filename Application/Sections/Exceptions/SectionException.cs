@@ -14,8 +14,5 @@ public class SectionNotFoundException(string id)
 public class SectionAlreadyExistsException(string id)
     : SectionException(id, $"Section already exists: {id}");
 
-/*public class SectionForUserNotFoundException(string userId)
-    : SectionException(Section.Empty(), $"User under id:{userId} not found");*/
-
 public class SectionUnknownException(string id, Exception innerException)
     : SectionException(id, $"Unknown exception for the section under id: {id}", innerException);

@@ -1,11 +1,7 @@
 using API.Dtos;
-using Application.Common;
 using Application.Common.Interfaces.Queries;
 using Application.Common.Interfaces.Repositories;
 using Application.Sections.Exceptions;
-using Application.Users.Commands;
-using Application.Users.Exceptions;
-using Domain;
 using MediatR;
 
 namespace Application.Sections.Commands;
@@ -51,21 +47,18 @@ public class UpdateSectionCommandHandler : IRequestHandler<UpdateSectionCommand,
         var oldUser = await _userQueries.GetById(existingSection.UserId);
         var newUser = await _userQueries.GetById(request.UserId);
 
-        // Оновлення даних секції
         existingSection.Name = request.Name;
         existingSection.UserId = request.UserId;
         existingSection.UpdatedAt = DateTime.UtcNow;
 
         await _sectionRepository.Update(request.SectionId, existingSection);
 
-        // Видалення секції у старого користувача
         if (oldUser != null)
         {
             oldUser.Sections.RemoveAll(s => s.SectionId == existingSection.SectionId);
             await _userRepository.Update(oldUser.UserId, oldUser);
         }
 
-        // Додавання секції до нового користувача
         if (newUser != null)
         {
             newUser.Sections.Add(existingSection);

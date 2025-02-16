@@ -6,7 +6,6 @@ public class CreateSectionCommandValidator : AbstractValidator<CreateSectionComm
 {
     public CreateSectionCommandValidator()
     {
-        
         RuleFor(x => x.Name).NotEmpty()
             .MaximumLength(255)
             .MinimumLength(3);

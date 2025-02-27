@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Application.SectionItems.Commands;
 
-public class UpdateSectionItemsCommand: IRequest<SectionItemDto>
+public class UpdateSectionItemsCommand : IRequest<SectionItemDto>
 {
     public string SectionItemId { get; }
     public string Title { get; }
@@ -29,7 +29,11 @@ public class UpdateSectionItemsCommandHandler : IRequestHandler<UpdateSectionIte
     private readonly ISectionRepository _sectionRepository;
     private readonly ISectionQueries _sectionQueries;
 
-    public UpdateSectionItemsCommandHandler(ISectionItemRepository sectionItemRepository, ISectionItemQueries sectionItemQueries, ISectionRepository sectionRepository, ISectionQueries sectionQueries)
+    public UpdateSectionItemsCommandHandler(
+        ISectionItemRepository sectionItemRepository, 
+        ISectionItemQueries sectionItemQueries, 
+        ISectionRepository sectionRepository, 
+        ISectionQueries sectionQueries)
     {
         _sectionItemRepository = sectionItemRepository;
         _sectionItemQueries = sectionItemQueries;
@@ -52,7 +56,7 @@ public class UpdateSectionItemsCommandHandler : IRequestHandler<UpdateSectionIte
 
         await _sectionItemRepository.Update(request.SectionItemId, existingSectionItem);
 
-        if (oldSection != null)
+        if (oldSection != null && oldSection.SectionId != newSection?.SectionId)
         {
             oldSection.SectionItems.RemoveAll(s => s.SectionItemId == existingSectionItem.SectionItemId);
             await _sectionRepository.Update(oldSection.SectionId, oldSection);
@@ -60,7 +64,15 @@ public class UpdateSectionItemsCommandHandler : IRequestHandler<UpdateSectionIte
 
         if (newSection != null)
         {
-            newSection.SectionItems.Add(existingSectionItem);
+            var existingItemIndex = newSection.SectionItems.FindIndex(s => s.SectionItemId == existingSectionItem.SectionItemId);
+            if (existingItemIndex >= 0)
+            {
+                newSection.SectionItems[existingItemIndex] = existingSectionItem; // Оновлення існуючого
+            }
+            else
+            {
+                newSection.SectionItems.Add(existingSectionItem); // Додавання, якщо немає
+            }
             await _sectionRepository.Update(newSection.SectionId, newSection);
         }
 

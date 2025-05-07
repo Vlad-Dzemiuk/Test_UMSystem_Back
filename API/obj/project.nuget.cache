@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AzLZY9pqamAg9wPSRYHtNjZhWHHlDW+9vu9+O80u7IHTNxKF27Mogw2GgTKDrFdVqh58GPgCdOHExxj1kYmfgw==",
+  "dgSpecHash": "NpAbpEND7su9s4i2AWP8H6sf0PTZKFRAH0gwQc3I4dgvhasSnVYYnh/poZ+4I0/80UUauvtM+XXxKLO3lipBpg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\API\\API.csproj",
+  "projectFilePath": "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\dnsclient\\1.6.1\\dnsclient.1.6.1.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\fluentvalidation\\12.0.0-preview1\\fluentvalidation.12.0.0-preview1.nupkg.sha512",

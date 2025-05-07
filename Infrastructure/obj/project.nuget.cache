@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ihn49rwtlndIUJyVzqtXJFiOEJ9F/N94IzdA5j4AN+BjfuK39a6vEum1iWG6Jg6wb2nI0r4TmB0sPV4bvMVpAw==",
+  "dgSpecHash": "xBnfLXIjkhrRWC5H3sOY+cno/lkZfyvbK+FWrojuGCBZ5z1YABsb0Q5TH8nVHoqmxv8Pi7cOGRqbGzymIruM2w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\Infrastructure\\Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\dnsclient\\1.6.1\\dnsclient.1.6.1.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\fluentvalidation\\12.0.0-preview1\\fluentvalidation.12.0.0-preview1.nupkg.sha512",

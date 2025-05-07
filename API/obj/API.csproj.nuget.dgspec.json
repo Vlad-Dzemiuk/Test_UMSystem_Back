@@ -1,42 +1,36 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\API\\API.csproj": {}
+    "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\API\\API.csproj": {
+    "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\API\\API.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\API\\API.csproj",
+        "projectPath": "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\API\\API.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\API\\obj\\",
+        "outputPath": "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\API\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\Application\\Application.csproj": {
-                "projectPath": "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\Application\\Application.csproj"
+              "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\Application\\Application.csproj": {
+                "projectPath": "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\Application\\Application.csproj"
               },
-              "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\Infrastructure\\Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\Infrastructure\\Infrastructure.csproj"
+              "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\Infrastructure\\Infrastructure.csproj"
               }
             }
           }
@@ -83,40 +77,34 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.406/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.408/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\Application\\Application.csproj": {
+    "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\Application\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\Application\\Application.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\Application\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\Application\\Application.csproj",
+        "projectPath": "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\Application\\Application.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\Application\\obj\\",
+        "outputPath": "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\Application\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\Domain\\Domain.csproj"
+              "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\Domain\\Domain.csproj"
               }
             }
           }
@@ -168,32 +156,26 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.406/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.408/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\Domain\\Domain.csproj": {
+    "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\Domain\\Domain.csproj",
+        "projectPath": "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\Domain\\obj\\",
+        "outputPath": "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\Domain\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -233,43 +215,37 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.406/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.408/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\Infrastructure\\Infrastructure.csproj": {
+    "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\Infrastructure\\Infrastructure.csproj",
+        "projectPath": "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\Infrastructure\\Infrastructure.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\Application\\Application.csproj": {
-                "projectPath": "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\Application\\Application.csproj"
+              "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\Application\\Application.csproj": {
+                "projectPath": "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\Application\\Application.csproj"
               },
-              "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\Admin\\3 курс\\Виробнича практика\\C#\\Test_UMSystem\\Domain\\Domain.csproj"
+              "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\Domain\\Domain.csproj"
               }
             }
           }
@@ -317,7 +293,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.406/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.408/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -8,19 +8,19 @@ public class Section
 {
     [BsonId]
     [BsonElement("section_id"), BsonRepresentation(BsonType.ObjectId)]
-    public string SectionId { get; set; }
+    public string? SectionId { get; set; }
     
     [BsonElement("Name"), BsonRepresentation(BsonType.String)]
-    public string Name { get; set; }
+    public string? Name { get; set; }
 
     [BsonElement("user_id"), BsonRepresentation(BsonType.ObjectId)]
-    public string UserId { get; set; }
+    public string? UserId { get; set; }
     
     [BsonElement("created_at"), BsonRepresentation(BsonType.DateTime)]
-    public DateTime CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
     
     [BsonElement("updated_at"), BsonRepresentation(BsonType.DateTime)]
-    public DateTime UpdatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
 
     [BsonIgnoreIfNull]
     public List<SectionItem>? SectionItems { get; set; } = new List<SectionItem>();

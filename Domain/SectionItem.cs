@@ -17,10 +17,10 @@ public class SectionItem
     public string? Content { get; set; }
     
     [BsonElement("created_at"), BsonRepresentation(BsonType.DateTime)]
-    public DateTime CreatedAt { get; set; }
+    public DateTime? CreatedAt { get; set; }
     
     [BsonElement("updated_at"), BsonRepresentation(BsonType.DateTime)]
-    public DateTime UpdatedAt { get; set; }
+    public DateTime? UpdatedAt { get; set; }
     
     [BsonElement("section_id"), BsonRepresentation(BsonType.ObjectId)]
     public string? SectionId { get; set; }

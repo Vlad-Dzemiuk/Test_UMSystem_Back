@@ -1,13 +1,13 @@
-C:\Users\Admin\3 курс\Виробнича практика\C#\Test_UMSystem\Domain\bin\Debug\net8.0\Domain.deps.json
-C:\Users\Admin\3 курс\Виробнича практика\C#\Test_UMSystem\Domain\bin\Debug\net8.0\Domain.dll
-C:\Users\Admin\3 курс\Виробнича практика\C#\Test_UMSystem\Domain\bin\Debug\net8.0\Domain.pdb
-C:\Users\Admin\3 курс\Виробнича практика\C#\Test_UMSystem\Domain\obj\Debug\net8.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Admin\3 курс\Виробнича практика\C#\Test_UMSystem\Domain\obj\Debug\net8.0\Domain.AssemblyInfoInputs.cache
-C:\Users\Admin\3 курс\Виробнича практика\C#\Test_UMSystem\Domain\obj\Debug\net8.0\Domain.AssemblyInfo.cs
-C:\Users\Admin\3 курс\Виробнича практика\C#\Test_UMSystem\Domain\obj\Debug\net8.0\Domain.csproj.CoreCompileInputs.cache
-C:\Users\Admin\3 курс\Виробнича практика\C#\Test_UMSystem\Domain\obj\Debug\net8.0\Domain.sourcelink.json
-C:\Users\Admin\3 курс\Виробнича практика\C#\Test_UMSystem\Domain\obj\Debug\net8.0\Domain.dll
-C:\Users\Admin\3 курс\Виробнича практика\C#\Test_UMSystem\Domain\obj\Debug\net8.0\refint\Domain.dll
-C:\Users\Admin\3 курс\Виробнича практика\C#\Test_UMSystem\Domain\obj\Debug\net8.0\Domain.pdb
-C:\Users\Admin\3 курс\Виробнича практика\C#\Test_UMSystem\Domain\obj\Debug\net8.0\ref\Domain.dll
-C:\Users\Admin\3 курс\Виробнича практика\C#\Test_UMSystem\Domain\obj\Debug\net8.0\Domain.csproj.AssemblyReference.cache
+C:\Users\Admin\3_course\Coursework\Backend\Domain\bin\Debug\net8.0\Domain.deps.json
+C:\Users\Admin\3_course\Coursework\Backend\Domain\bin\Debug\net8.0\Domain.dll
+C:\Users\Admin\3_course\Coursework\Backend\Domain\bin\Debug\net8.0\Domain.pdb
+C:\Users\Admin\3_course\Coursework\Backend\Domain\obj\Debug\net8.0\Domain.csproj.AssemblyReference.cache
+C:\Users\Admin\3_course\Coursework\Backend\Domain\obj\Debug\net8.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Admin\3_course\Coursework\Backend\Domain\obj\Debug\net8.0\Domain.AssemblyInfoInputs.cache
+C:\Users\Admin\3_course\Coursework\Backend\Domain\obj\Debug\net8.0\Domain.AssemblyInfo.cs
+C:\Users\Admin\3_course\Coursework\Backend\Domain\obj\Debug\net8.0\Domain.csproj.CoreCompileInputs.cache
+C:\Users\Admin\3_course\Coursework\Backend\Domain\obj\Debug\net8.0\Domain.sourcelink.json
+C:\Users\Admin\3_course\Coursework\Backend\Domain\obj\Debug\net8.0\Domain.dll
+C:\Users\Admin\3_course\Coursework\Backend\Domain\obj\Debug\net8.0\refint\Domain.dll
+C:\Users\Admin\3_course\Coursework\Backend\Domain\obj\Debug\net8.0\Domain.pdb
+C:\Users\Admin\3_course\Coursework\Backend\Domain\obj\Debug\net8.0\ref\Domain.dll

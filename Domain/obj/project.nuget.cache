@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "+UZNkhXxYcxrcJ8NZBo6sCC56WZjAQPGQMRrqoXAPKdtlpPkwxupwNzf/L91EFfFEWgKoSHvmLNQZh9Y0Axctg==",
+  "dgSpecHash": "X3cKUWmxsto=",
   "success": true,
   "projectFilePath": "C:\\Users\\Admin\\3_course\\Coursework\\Backend\\Domain\\Domain.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Admin\\.nuget\\packages\\mongodb.bson\\3.1.0\\mongodb.bson.3.1.0.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\mongodb.bson\\2.25.0\\mongodb.bson.2.25.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\5.0.0\\system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512"
   ],

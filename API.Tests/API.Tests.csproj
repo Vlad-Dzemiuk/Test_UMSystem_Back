@@ -1,0 +1,51 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+
+        <IsPackable>false</IsPackable>
+        <IsTestProject>true</IsTestProject>
+
+        <PreserveCompilationContext>true</PreserveCompilationContext>
+        <GenerateDepsFile>true</GenerateDepsFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.5" />
+        <PackageReference Include="Testcontainers" Version="3.9.0" />
+        <PackageReference Include="Testcontainers.MongoDb" Version="3.9.0" />
+        <PackageReference Include="xunit" Version="2.8.1" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.8.1">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="coverlet.collector" Version="6.0.2">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+        <PackageReference Include="FluentAssertions" Version="6.12.0" />
+        <PackageReference Include="Moq" Version="4.20.70" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\API\API.csproj" />
+        <ProjectReference Include="..\Application\Application.csproj" />
+        <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Update="..\API\$(OutDir)API.deps.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="Never" />
+        <None Update="..\API\$(OutDir)API.runtimeconfig.json" CopyToOutputDirectory="PreserveNewest" CopyToPublishDirectory="Never" />
+    </ItemGroup>
+
+    <Target Name="CopyDepsFileToTestOutput" AfterTargets="Build">
+        <Copy SourceFiles="$(OutputPath)testhost.deps.json" DestinationFolder="$(OutputPath)" SkipUnchangedFiles="true" />
+        <Copy SourceFiles="$(OutputPath)testhost.runtimeconfig.json" DestinationFolder="$(OutputPath)" SkipUnchangedFiles="true" />
+        <Copy SourceFiles="..\API\$(OutDir)API.deps.json" DestinationFolder="$(OutputPath)" SkipUnchangedFiles="true" />
+        <Copy SourceFiles="..\API\$(OutDir)API.runtimeconfig.json" DestinationFolder="$(OutputPath)" SkipUnchangedFiles="true" />
+    </Target>
+
+</Project>

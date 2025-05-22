@@ -13,7 +13,7 @@ public class Section
     [BsonElement("Name"), BsonRepresentation(BsonType.String)]
     public string? Name { get; set; }
 
-    [BsonElement("user_id"), BsonRepresentation(BsonType.ObjectId)]
+    [BsonElement("user_id"), BsonRepresentation(BsonType.String)]
     public string? UserId { get; set; }
     
     [BsonElement("created_at"), BsonRepresentation(BsonType.DateTime)]

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Application.Common.Interfaces.Queries;
 using Application.Common.Interfaces.Repositories;
 using Application.SectionItems.Commands;
+using Application.SectionItems.Exceptions;
 using Domain;
 using MediatR;
 
@@ -49,25 +50,51 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<SectionItemDto>> Post([FromBody] CreateSectionItemDto dto)
         {
-            var command = new CreateSectionItemsCommand(dto);
-            var result = await _mediator.Send(command);
-            return CreatedAtAction(nameof(GetById), new { id = result.SectionItemId }, result);
+            try
+            {
+                var command = new CreateSectionItemsCommand(dto);
+                var result = await _mediator.Send(command);
+                return CreatedAtAction(nameof(GetById), new { id = result.SectionItemId }, result);
+            }
+            catch (SectionItemAlreadyExistsException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
         
         [HttpPut("{id}")]
         public async Task<ActionResult<SectionItemDto>> Put(string id, [FromBody] UpdateSectionItemDto dto)
         {
-            var command = new UpdateSectionItemsCommand(id, dto);
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            try
+            {
+                var command = new UpdateSectionItemsCommand(id, dto);
+                var result = await _mediator.Send(command);
+                return Ok(result);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Внутрішня помилка сервера: {ex.Message}");
+            }
+            
         }
         
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(string id)
         {
-            var command = new DeleteSectionItemsCommand(id);
-            await _mediator.Send(command);
-            return Ok();
+            try
+            {
+                var command = new DeleteSectionItemsCommand(id);
+                await _mediator.Send(command);
+                return Ok();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
     }
 }

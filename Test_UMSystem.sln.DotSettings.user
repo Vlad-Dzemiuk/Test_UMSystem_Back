@@ -5,5 +5,6 @@
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::C66DBB36-93D4-4991-87FA-E21BF58EAB08::net8.0::API.Tests.SectionControllerTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::C66DBB36-93D4-4991-87FA-E21BF58EAB08::net8.0::API.Tests.UserControllerTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::C66DBB36-93D4-4991-87FA-E21BF58EAB08::net8.0::API.Tests.SectionItemControllerTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

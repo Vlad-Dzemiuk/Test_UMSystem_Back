@@ -3,12 +3,12 @@ using Microsoft.AspNetCore.Mvc;
 using Application.Common.Interfaces.Queries;
 using Application.Common.Interfaces.Repositories;
 using Application.Users.Commands;
+using Application.Users.Exceptions;
 using Domain;
 using MediatR;
 
 namespace API.Controllers
 {
-    
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -44,29 +44,54 @@ namespace API.Controllers
                 return NotFound(ex.Message);
             }
         }
-        
+
         [HttpPost]
         public async Task<ActionResult<UserDto>> Post([FromBody] CreateUserDto dto)
         {
-            var command = new CreateUserCommand(dto);
-            var result = await _mediator.Send(command);
-            return CreatedAtAction(nameof(GetById), new { id = result.UserId }, result);
+            try
+            {
+                var command = new CreateUserCommand(dto);
+                var result = await _mediator.Send(command);
+                return CreatedAtAction(nameof(GetById), new { id = result.UserId }, result);
+            }
+            catch (UserAlreadyExistsException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
-        
+
         [HttpPut("{id}")]
         public async Task<ActionResult<UserDto>> Put(string id, [FromBody] UpdateUserDto dto)
         {
-            var command = new UpdateUserCommand(id, dto);
-            var result = await _mediator.Send(command);
-            return Ok(result);
+            try
+            {
+                var command = new UpdateUserCommand(id, dto);
+                var result = await _mediator.Send(command);
+                return Ok(result);    
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Внутрішня помилка сервера: {ex.Message}");
+            }
         }
-        
+
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(string id)
         {
-            var command = new DeleteUserCommand(id);
-            await _mediator.Send(command);
-            return Ok();
+            try
+            {
+                var command = new DeleteUserCommand(id);
+                await _mediator.Send(command);
+                return Ok();   
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
     }
 }

@@ -4,5 +4,6 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b1c3e5dd_002D4a8d_002D48fd_002D87c6_002D40494e1bc520/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="SectionControllerTests #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::C66DBB36-93D4-4991-87FA-E21BF58EAB08::net8.0::API.Tests.SectionControllerTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::C66DBB36-93D4-4991-87FA-E21BF58EAB08::net8.0::API.Tests.UserControllerTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
